@@ -1,6 +1,10 @@
-import processing.core.PApplet;
+import java.io.*;
+import java.net.*;
 
 public class CircuitVisualization extends PApplet {
+
+    private Socket socket;
+    private DataInputStream input;
 
     public static void main(String[] args) {
         PApplet.main("CircuitVisualization");
@@ -13,13 +17,28 @@ public class CircuitVisualization extends PApplet {
 
     @Override
     public void setup() {
-        background(255); // Set the background color to white
+        try {
+            ServerSocket serverSocket = new ServerSocket(12345);
+            println("Server started on port 12345..."); // Confirm that the server is ready
+            socket = serverSocket.accept(); // Wait for the client (JADE) to connect
+            input = new DataInputStream(socket.getInputStream());
+            println("Client connected!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void draw() {
-        // For now, just draw a simple circle to represent a component
-        fill(0);
-        ellipse(300, 300, 50, 50); // Circle at the center
+        try {
+            String message = input.readUTF();
+            background(255);
+            fill(0);
+            ellipse(300, 300, 50, 50); // Draw circle (component)
+            text(message, 250, 250); // Display received message
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
