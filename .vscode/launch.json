@@ -23,6 +23,32 @@
             "request": "launch",
             "mainClass": "jade.Boot",
             "args": "-gui -name the-platform -agents Peter:HelloWorldAgent"
+        },
+        {
+            "type": "java",
+            "name": "JADE Main Container",
+            "request": "launch",
+            "mainClass": "jade.Boot",
+            "args": "-gui"
+        },
+        {
+            "type": "java",
+            "name": "Circuit Visualizer",
+            "request": "launch",
+            "mainClass": "CircuitVisualizer"
+        },
+        {
+            "type": "java",
+            "name": "Circuit Agents",
+            "request": "launch",
+            "mainClass": "jade.Boot",
+            "args": "-container -agents \"R1:ResistorAgent\"",
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch All",
+            "configurations": ["Circuit Visualizer", "JADE Main Container", "Circuit Agents"]
         }
     ]
 
