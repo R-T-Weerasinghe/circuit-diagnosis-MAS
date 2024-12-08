@@ -42,7 +42,7 @@
             "name": "Circuit Agents",
             "request": "launch",
             "mainClass": "jade.Boot",
-            "args": "-container -agents \"R1:ResistorAgent\"",
+            "args": "-container -agents \"R1:ResistorAgent;C1:CapacitorAgent\"",
         }
     ],
     "compounds": [
